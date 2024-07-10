@@ -1,3 +1,12 @@
+Note: 
+The solution code of this project is from scratch based on the following codelabs :
+1. https://developer.android.com/codelabs/basic-android-kotlin-compose-sql
+2. https://developer.android.com/codelabs/basic-android-kotlin-compose-practice-bus-schedule-app
+3. https://developer.android.com/codelabs/basic-android-kotlin-compose-datastore
+4. https://developer.android.com/codelabs/basic-android-kotlin-compose-persisting-data-room
+5. https://developer.android.com/codelabs/basic-android-kotlin-compose-update-data-room
+
+
 
 Project description:    
 In this project, you'll build the Flight Search app in which users enter an airport and can view a list of destinations using that airport as a departure. This project gives you the opportunity to practice your skills with SQL, Room, and DataStore by offering you a set of app requirements that you must fulfill. In particular, you need the Flight Search app to meet the following requirements:
