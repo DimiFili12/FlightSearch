@@ -24,7 +24,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -34,6 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightsearch.R
 import com.example.flightsearch.ui.AppViewModelProvider
@@ -45,17 +45,16 @@ fun HomeScreen(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
-    val departureUiState by viewModel.departureUiState.collectAsState()
-    val flightsUiState by viewModel.flightsWithFavoriteStatusUiState.collectAsState()
-    val userInput by viewModel.userInputFlow.collectAsState()
-    val favoriteUiState by viewModel.favorites.collectAsState()
-    val showDepartures by viewModel.showDepartures.collectAsState()
+    val departureUiState by viewModel.departureUiState.collectAsStateWithLifecycle()
+    val flightsUiState by viewModel.flightsWithFavoriteStatusUiState.collectAsStateWithLifecycle()
+    val favoriteUiState by viewModel.favorites.collectAsStateWithLifecycle()
+    val showDepartures by viewModel.showDepartures.collectAsStateWithLifecycle()
 
     MainScreen(
         departureList = departureUiState.airportDetails,
         flightPairs = flightsUiState,
         favoritePairs = favoriteUiState,
-        userInput = userInput,
+        userInput = viewModel.userInput,
         showDepartures = showDepartures,
         onUserInputChanged = { input ->
             viewModel.updateSearchQuery(input)
