@@ -9,5 +9,5 @@ interface FavoriteRepository {
 
     fun getFavorites(): Flow<List<Favorite>>
 
-    fun checkFav(id: Int): Boolean
+    suspend fun checkFav(id: Int): Boolean
 }

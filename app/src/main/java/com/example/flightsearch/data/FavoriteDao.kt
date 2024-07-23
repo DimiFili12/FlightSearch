@@ -18,5 +18,5 @@ interface FavoriteDao {
     fun getAllFavorites(): Flow<List<Favorite>>
 
     @Query("SELECT * from favorite WHERE id = :id")
-    fun checkFavorite(id: Int): Boolean
+    suspend fun checkFavorite(id: Int): Boolean
 }

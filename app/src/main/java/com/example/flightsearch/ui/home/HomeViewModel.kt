@@ -10,19 +10,16 @@ import com.example.flightsearch.data.AirportRepository
 import com.example.flightsearch.data.Favorite
 import com.example.flightsearch.data.FavoriteRepository
 import com.example.flightsearch.data.UserPreferencesRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.WhileSubscribed
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomeViewModel(
     private val airportRepository: AirportRepository,
@@ -139,9 +136,7 @@ class HomeViewModel(
     }
 
     private suspend fun isInFavorites(pair: Pair<AirportDetails, AirportDetails>): Boolean {
-        return withContext(Dispatchers.IO) {
-            favoriteRepository.checkFav(pair.first.id + pair.second.id)
-        }
+        return favoriteRepository.checkFav(pair.first.id + pair.second.id)
     }
 
     fun insertFavorite(flights: FlightsWithFavoriteStatus) {
