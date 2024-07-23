@@ -33,8 +33,10 @@ class HomeViewModel(
         private const val TIMEOUT = 5_000L
     }
 
-    var userInput by mutableStateOf("")
-        private set
+    private var _userInput by mutableStateOf("")
+    var userInput: String
+        get() = _userInput
+        private set(value) { _userInput = value }
 
     private val _departureIataFlow = MutableStateFlow("")
 
