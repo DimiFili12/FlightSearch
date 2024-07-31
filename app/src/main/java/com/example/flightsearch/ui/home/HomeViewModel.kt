@@ -14,6 +14,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
@@ -40,10 +41,10 @@ class HomeViewModel(
     private val _selectedDepartureFlow = MutableStateFlow(AirportDetails())
 
     private val _showDepartures = MutableStateFlow(true)
-    val showDepartures: StateFlow<Boolean> = _showDepartures
+    val showDepartures: StateFlow<Boolean> = _showDepartures.asStateFlow()
 
     private val _favorites = MutableStateFlow<List<FlightsWithFavoriteStatus>>(emptyList())
-    val favorites: StateFlow<List<FlightsWithFavoriteStatus>> = _favorites
+    val favorites: StateFlow<List<FlightsWithFavoriteStatus>> = _favorites.asStateFlow()
 
     private val _arrivalsFlow = MutableStateFlow<List<AirportDetails>>(emptyList())
 
@@ -66,7 +67,7 @@ class HomeViewModel(
             )
 
     private val _flightsWithFavoriteStatusUiState: MutableStateFlow<List<FlightsWithFavoriteStatus>> = MutableStateFlow(emptyList())
-    val flightsWithFavoriteStatusUiState: StateFlow<List<FlightsWithFavoriteStatus>> = _flightsWithFavoriteStatusUiState
+    val flightsWithFavoriteStatusUiState: StateFlow<List<FlightsWithFavoriteStatus>> = _flightsWithFavoriteStatusUiState.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -136,7 +137,7 @@ class HomeViewModel(
     }
 
     private suspend fun isInFavorites(pair: Pair<AirportDetails, AirportDetails>): Boolean {
-        return favoriteRepository.checkFav(pair.first.id + pair.second.id)
+        return favoriteRepository.checkFav(pair.first.id + pair.second.id) > 0
     }
 
     fun insertFavorite(flights: FlightsWithFavoriteStatus) {

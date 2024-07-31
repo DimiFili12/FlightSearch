@@ -58,7 +58,9 @@ fun HomeScreen(
         showDepartures = showDepartures,
         onUserInputChanged = { input ->
             viewModel.updateSearchQuery(input)
-            viewModel.showDepartures()
+            if (!showDepartures) {
+                viewModel.showDepartures()
+            }
         },
         onSelectDeparture = { selected ->
             viewModel.selectDeparture(selected)
