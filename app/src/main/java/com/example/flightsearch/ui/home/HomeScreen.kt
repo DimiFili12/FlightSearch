@@ -59,12 +59,12 @@ fun HomeScreen(
         onUserInputChanged = { input ->
             viewModel.updateSearchQuery(input)
             if (!showDepartures) {
-                viewModel.showDepartures()
+                viewModel.toggleShowDepartures()
             }
         },
         onSelectDeparture = { selected ->
             viewModel.selectDeparture(selected)
-            viewModel.hideDepartures()
+            viewModel.toggleShowDepartures()
         },
         onSaveFavorite = { pair -> viewModel.insertFavorite(pair) },
         onDeleteFavorite = { pair -> viewModel.deleteFavorite(pair) },

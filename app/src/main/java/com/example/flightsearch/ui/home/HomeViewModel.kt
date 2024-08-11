@@ -95,12 +95,8 @@ class HomeViewModel(
         }
     }
 
-    fun showDepartures() {
-        _showDepartures.value = true
-    }
-
-    fun hideDepartures() {
-        _showDepartures.value = false
+    fun toggleShowDepartures() {
+        _showDepartures.value = !_showDepartures.value
     }
 
     fun selectDeparture(selected: AirportDetails) {
@@ -137,7 +133,7 @@ class HomeViewModel(
     }
 
     private suspend fun isInFavorites(pair: Pair<AirportDetails, AirportDetails>): Boolean {
-        return favoriteRepository.checkFav(pair.first.id + pair.second.id) > 0
+        return favoriteRepository.checkFav(pair.first.id + pair.second.id)
     }
 
     fun insertFavorite(flights: FlightsWithFavoriteStatus) {

@@ -9,5 +9,5 @@ class OfflineFavoriteRepository(private val favoriteDao: FavoriteDao): FavoriteR
 
     override fun getFavorites(): Flow<List<Favorite>> = favoriteDao.getAllFavorites()
 
-    override suspend fun checkFav(id: Int): Int = favoriteDao.checkFavorite(id)
+    override suspend fun checkFav(id: Int): Boolean = favoriteDao.checkFavorite(id)
 }
